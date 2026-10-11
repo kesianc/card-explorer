@@ -17,9 +17,15 @@
   --color-gold: #c8a35e;
   --color-gold-bright: #e4c88a;
   --color-gold-ink: #1a1408;
+
+    /* Fontes */
+  --font-display: "Castoro Titling", "Castoro", Georgia, serif;
+  --font-serif: "Castoro", Georgia, "Times New Roman", serif;
+  --font-ui: "Mona Sans Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background-color: var(--color-ground);
   color: var(--color-text);
+  font-family: var(--font-ui);
 }

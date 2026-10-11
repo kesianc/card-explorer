@@ -1,0 +1,1 @@
+export const POPULAR_SEARCHES = ["Dragons", "Goblins", "Artifacts", "Angels", "Lands"];

@@ -1,12 +1,21 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Search } from "lucide-react";
 
-export function SearchForm() {
+type SearchFormProps = {
+  defaultValue?: string;
+  className?: string;
+};
+
+export function SearchForm({ defaultValue = "", className }: SearchFormProps) {
   const router = useRouter();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,7 +30,7 @@ export function SearchForm() {
     <form
       onSubmit={handleSubmit}
       role="search"
-      className="mt-9 flex w-full max-w-xl items-center gap-2 rounded-2xl border border-white/10 bg-surface p-1.5 transition-colors focus-within:border-gold/60"
+      className={`flex w-full max-w-xl items-center gap-2 rounded-2xl border border-white/10 bg-surface p-1.5 transition-colors focus-within:border-gold/60 ${className ?? "mt-9"}`}
     >
       <Search className="ml-3 size-5 shrink-0 text-text-3" aria-hidden />
       <input

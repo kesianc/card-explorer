@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
 import type { CardDetails } from "@/lib/types";
 import { fetchCardById } from "@/lib/scryfall";
 import { CardDetailPanel } from "./CardDetailPanel";
@@ -24,6 +23,7 @@ export function CardDetailModal({ cardId, onClose }: CardDetailModalProps) {
     }
 
     let cancelled = false;
+    setCard(null);
     setLoading(true);
     setError(null);
 
@@ -48,40 +48,12 @@ export function CardDetailModal({ cardId, onClose }: CardDetailModalProps) {
 
   if (!cardId) return null;
 
-  if (loading) {
-    return (
-      <div
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-ink/60 backdrop-blur-sm"
-        role="status"
-        aria-live="polite"
-        aria-busy="true"
-      >
-        <Loader2 className="size-10 animate-spin text-gold-bright" aria-hidden />
-        <p className="font-display text-sm uppercase tracking-[0.14em] text-gold-bright">
-          Loading card
-        </p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-6">
-        <div className="rounded-2xl border border-white/10 bg-surface px-6 py-5 text-center">
-          <p className="text-text">{error}</p>
-          <button
-            type="button"
-            onClick={onClose}
-            className="mt-4 cursor-pointer rounded-xl bg-gold px-5 py-2.5 font-semibold text-gold-ink"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!card) return null;
-
-  return <CardDetailPanel card={card} onClose={onClose} />;
+  return (
+    <CardDetailPanel
+      card={card}
+      detailsLoading={loading}
+      detailsError={error}
+      onClose={onClose}
+    />
+  );
 }

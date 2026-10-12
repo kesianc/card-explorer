@@ -3,7 +3,6 @@
 import { useState } from "react";
 import type { Card } from "@/lib/types";
 import { CardDetailModal } from "./CardDetailModal";
-import { MagicDust } from "./MagicDust";
 import { HeroShowcaseDraw } from "./SurpriseDiscovery";
 import { ScryfallImage } from "./ScryfallImage";
 
@@ -104,8 +103,6 @@ export function HeroShowcase({ fan, featured }: HeroShowcaseProps) {
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-[32%] h-[min(70%,13rem)] w-[min(65%,15rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_50%_55%_at_50%_50%,rgba(255,220,160,0.12),transparent_68%)]"
           />
-
-          <MagicDust className="inset-0 opacity-95" />
 
           <div className="absolute inset-x-0 bottom-[34%] top-[0%] z-10 sm:bottom-[36%]">
             {slots.map((slot) => (

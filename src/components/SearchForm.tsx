@@ -7,9 +7,15 @@ import { ArrowRight, Search } from "lucide-react";
 type SearchFormProps = {
   defaultValue?: string;
   className?: string;
+  /** Chamado quando o campo fica vazio (apagar texto ou limpar busca). */
+  onQueryClear?: () => void;
 };
 
-export function SearchForm({ defaultValue = "", className }: SearchFormProps) {
+export function SearchForm({
+  defaultValue = "",
+  className,
+  onQueryClear,
+}: SearchFormProps) {
   const router = useRouter();
   const [value, setValue] = useState(defaultValue);
 
@@ -21,9 +27,19 @@ export function SearchForm({ defaultValue = "", className }: SearchFormProps) {
     event.preventDefault();
 
     const term = value.trim();
-    if (!term) return;
+    if (!term) {
+      onQueryClear?.();
+      return;
+    }
 
     router.push(`/explore?q=${encodeURIComponent(term)}`);
+  }
+
+  function handleChange(next: string) {
+    setValue(next);
+    if (onQueryClear && next.trim() === "") {
+      onQueryClear();
+    }
   }
 
   return (
@@ -36,7 +52,7 @@ export function SearchForm({ defaultValue = "", className }: SearchFormProps) {
       <input
         type="search"
         value={value}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => handleChange(event.target.value)}
         placeholder="Search cards, abilities, artists..."
         aria-label="Search cards"
         className="min-w-0 flex-1 bg-transparent px-2 py-3 text-text placeholder:text-text-3 focus:outline-none"

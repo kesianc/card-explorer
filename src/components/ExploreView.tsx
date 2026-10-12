@@ -144,6 +144,12 @@ export function ExploreView() {
     });
   }
 
+  function clearSearchQuery() {
+    pushParams((params) => {
+      params.delete("q");
+    });
+  }
+
   function applyFilters(next: ExploreFilters) {
     pushParams((params) => {
       setExploreFiltersOnParams(params, next);
@@ -199,7 +205,11 @@ export function ExploreView() {
           Browse the full Scryfall catalog or narrow your search.
         </p>
 
-        <SearchForm defaultValue={query} className="mt-8 max-w-3xl" />
+        <SearchForm
+          defaultValue={query}
+          className="mt-8 max-w-3xl"
+          onQueryClear={clearSearchQuery}
+        />
 
         <div className="mt-4 flex flex-wrap items-center gap-2.5">
           <button

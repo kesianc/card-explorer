@@ -142,24 +142,27 @@ export function CardDetailPanel({ card, onClose }: CardDetailPanelProps) {
                 </dd>
               </div>
               {card.artist && (
-                <div className="sm:col-span-2">
+                <div>
                   <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-text-3">
                     Artist
                   </dt>
                   <dd className="mt-1 text-text">{card.artist}</dd>
                 </div>
               )}
+              <div
+                className={`flex items-end ${card.artist ? "" : "sm:col-start-2"}`}
+              >
+                <a
+                  href={card.scryfallUri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-semibold text-gold-bright transition-colors hover:text-gold"
+                >
+                  View on Scryfall
+                  <ExternalLink className="size-4" aria-hidden />
+                </a>
+              </div>
             </dl>
-
-            <a
-              href={card.scryfallUri}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-bright transition-colors hover:text-gold"
-            >
-              View on Scryfall
-              <ExternalLink className="size-4" aria-hidden />
-            </a>
           </div>
         </div>
       </div>
